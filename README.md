@@ -4,11 +4,11 @@
 Experiment to see if I can design a Nutritional Label scanner to take data from it quickly. This is meant as a UX feature for my Nutritional project. <br/>
 
 ## The Idea
-- ![image](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/4b6c3027-714a-470d-8dfd-2c997adb4f65) <br/>
+![image](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/4b6c3027-714a-470d-8dfd-2c997adb4f65) <br/>
 
 Looking at the FDA guideline label you can notice a few patterns that might help create an algorithm to aid me. <br/>
   
-- ![image](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/acb82ce6-eb90-4ff0-9166-087b231ff640) <br/>
+![image](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/acb82ce6-eb90-4ff0-9166-087b231ff640) <br/>
 
 Here I describe it (although the writing is hard to read), it describes the following:
 * Nutritional values are all on a single line (in red)
