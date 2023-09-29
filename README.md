@@ -20,3 +20,6 @@ Here I describe it (although the writing is hard to read), it describes the foll
 The Algorithm will parse the given callback string from ML kit and check for key words like Calories, now since we know that calories should be on the same line as the calorie amount, we can associate that value to calories <br/>
 This will loop for every value possible, until it finds them all on the label, or until the user decides to stop the scanner. <br/>
 Note that there will be some bridges that will be crossed for example if it reads Sat. Fat, and its supposed to be Saturated Fat, it will fail, so we have to create a base case for everything that might be a problem. <br/>
+
+## Latest Update
+The algorithm was put through some improv, but the general idea works well. I got it to scan calories as of now, but the rest should be kinda rinse and repeat. (will upload the project files soon)
