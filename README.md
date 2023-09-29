@@ -16,8 +16,9 @@ Here I describe it (although the writing is hard to read), it describes the foll
 
 
 ## Algorithm
+V.2 : The algorithm is now queue based, it will take a nonnull string from ml kit and break it into 1 line each, when it is asked to parse for values it will go through all items in the queue, and then parse each one individually.
 
-The Algorithm will parse the given callback string from ML kit and check for key words like Calories, now since we know that calories should be on the same line as the calorie amount, we can associate that value to calories <br/>
+V.1 : The Algorithm will parse the given callback string from ML kit and check for key words like Calories, now since we know that calories should be on the same line as the calorie amount, we can associate that value to calories <br/>
 This will loop for every value possible, until it finds them all on the label, or until the user decides to stop the scanner. <br/>
 Note that there will be some bridges that will be crossed for example if it reads Sat. Fat, and its supposed to be Saturated Fat, it will fail, so we have to create a base case for everything that might be a problem. <br/>
 
