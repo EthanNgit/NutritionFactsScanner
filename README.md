@@ -14,13 +14,8 @@ Here I describe it (although the writing is hard to read), it describes the foll
 
 <br/> So the ML kit from google should be able to pick these up, somewhat easily. The problem is, it does not. So to help it, we use a video, not just a picture, so that the user can scan around a label and it can try to parse data while they do it. Given that this is bound to be extremely simple of an algorithm (I will describe the algorithm further down), it might never pick any information, but it is still better UX wise then nothing (which is the goal). <br/>
 
-
-## Algorithm
-V.2 : The algorithm is now queue based, it will take a nonnull string from ml kit and break it into 1 line each, when it is asked to parse for values it will go through all items in the queue, and then parse each one individually.
-
-V.1 : The Algorithm will parse the given callback string from ML kit and check for key words like Calories, now since we know that calories should be on the same line as the calorie amount, we can associate that value to calories <br/>
-This will loop for every value possible, until it finds them all on the label, or until the user decides to stop the scanner. <br/>
-Note that there will be some bridges that will be crossed for example if it reads Sat. Fat, and its supposed to be Saturated Fat, it will fail, so we have to create a base case for everything that might be a problem. <br/>
-
 ## Latest Update
 The algorithm was put through some improv, but the general idea works well. I got it to scan calories as of now, but the rest should be kinda rinse and repeat. (will upload the project files soon)
+Here is a quick picture of what it looks like now
+![image](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/d5ea3691-3e18-426f-ae41-f356355747c0)
+
