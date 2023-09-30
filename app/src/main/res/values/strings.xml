@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NutritionLabelTest</string>
+
+    <string name="scan_label">Scan Label</string>
+</resources>

@@ -1,0 +1,22 @@
+--Calories (Parse Even Numbers Only)--
+calorie,calories,cal,cals,kilocalorie,kilocalories,kcal,kcals
+--Protein--
+protein,proteins
+--Carb--
+carb, carbs,carbohydrate,carbohydrates,total carb,total carbs,total carbohydrate,total carbohydrates
+--Dietary Fiber--
+dietary fiber,dietary fibers,fiber,fibers,dietary fibre,dietary fibres,fibre,fibres
+Total Sugars
+total sugars,total sugar,sugar
+--Added Sugars--
+added sugars,added sugar
+--Fat--
+fat,fats,total fat,total fats
+--Saturated Fat-
+sat fat,sat. fat,sat fats,sat. fats,saturated fat,saturated fats
+--Trans Fat--
+tran fat,trans fat,tran. fat,trans. fat
+--Cholesterol--
+cholesterol
+--Sodium--
+sodium
