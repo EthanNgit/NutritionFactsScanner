@@ -24,9 +24,16 @@ import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.nutritionlabeltest.R;
 import com.example.nutritionlabeltest.custom.NorthUI;
+import com.example.nutritionlabeltest.custom.Nutrient;
+import com.example.nutritionlabeltest.custom.NutrientMeasurement;
 import com.example.nutritionlabeltest.custom.NutritionLabelParser;
 import com.example.nutritionlabeltest.custom.UnitCallback;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,14 +46,45 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class ScannerActivity extends AppCompatActivity {
+public class ScannerActivity extends AppCompatActivity implements View.OnClickListener{
 
     // UI
+    private ImageView backBtn;
     private PreviewView previewView;
+    private ImageView resetBtn;
+    private ImageView doneBtn;
+    private LinearLayout servingSizeLyt;
+    private TextView servingSizeValue;
+    private LinearLayout calorieLyt;
+    private TextView calorieValue;
+    private LinearLayout fatLyt;
+    private TextView totalFatValue;
+    private TextView saturatedFatValue;
+    private TextView transFatValue;
+    private LinearLayout cholesterolLyt;
+    private TextView cholesterolValue;
+    private LinearLayout sodiumLyt;
+    private TextView sodiumValue;
+    private LinearLayout potassiumLyt;
+    private TextView potassiumValue;
+    private LinearLayout carbLyt;
+    private TextView totalCarbValue;
+    private TextView dietaryFiberValue;
+    private TextView totalSugarValue;
+    private TextView addedSugarValue;
+    private LinearLayout proteinLyt;
+    private TextView proteinValue;
+
+    HashMap<Nutrient, TextView> nutrientToTextMap = new HashMap<>();
+
 
     // Other
     private CameraSelector cameraSelector;
@@ -63,7 +101,8 @@ public class ScannerActivity extends AppCompatActivity {
 
         doUI();
 
-        parser = new NutritionLabelParser(this);
+        parser = new NutritionLabelParser(this, false);
+        parser.onNutritionalInformationUpdated.addListener(this, "updateNutritionalUI");
 
         cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
@@ -82,7 +121,67 @@ public class ScannerActivity extends AppCompatActivity {
 
     private void doUI() {
         NorthUI.setAndroidUI(this, R.color.background_dark);
+
+        backBtn = findViewById(R.id.back_btn);
         previewView = findViewById(R.id.preview_view);
+        resetBtn = findViewById(R.id.reset_btn);
+        doneBtn = findViewById(R.id.done_btn);
+
+        servingSizeLyt = findViewById(R.id.serving_size_layout);
+        servingSizeValue = findViewById(R.id.serving_size_value);
+        calorieLyt = findViewById(R.id.calorie_layout);
+        calorieValue = findViewById(R.id.calorie_value);
+        fatLyt = findViewById(R.id.fat_layout);
+        totalFatValue = findViewById(R.id.total_fat_value);
+        saturatedFatValue = findViewById(R.id.saturated_fat_value);
+        transFatValue = findViewById(R.id.trans_fat_value);
+        cholesterolLyt = findViewById(R.id.cholesterol_layout);
+        cholesterolValue = findViewById(R.id.cholesterol_value);
+        sodiumLyt = findViewById(R.id.sodium_layout);
+        sodiumValue = findViewById(R.id.sodium_value);
+        potassiumLyt = findViewById(R.id.potassium_layout);
+        potassiumValue = findViewById(R.id.potassium_value);
+        carbLyt = findViewById(R.id.carbs_layout);
+        totalCarbValue = findViewById(R.id.total_carb_value);
+        saturatedFatValue = findViewById(R.id.saturated_fat_value);
+        dietaryFiberValue = findViewById(R.id.dietary_fiber_value);
+        totalSugarValue = findViewById(R.id.total_sugar_value);
+        addedSugarValue = findViewById(R.id.added_sugar_value);
+        proteinLyt = findViewById(R.id.protein_layout);
+        proteinValue = findViewById(R.id.protein_value);
+
+        nutrientToTextMap.put(Nutrient.Calorie, calorieValue);
+        nutrientToTextMap.put(Nutrient.TotalFat, totalFatValue);
+        nutrientToTextMap.put(Nutrient.SaturatedFat, saturatedFatValue);
+        nutrientToTextMap.put(Nutrient.TransFat, transFatValue);
+        nutrientToTextMap.put(Nutrient.Cholesterol, cholesterolValue);
+        nutrientToTextMap.put(Nutrient.Sodium, sodiumValue);
+        nutrientToTextMap.put(Nutrient.Potassium, potassiumValue);
+        nutrientToTextMap.put(Nutrient.TotalCarb, totalCarbValue);
+        nutrientToTextMap.put(Nutrient.DietaryFiber, dietaryFiberValue);
+        nutrientToTextMap.put(Nutrient.TotalSugar, totalSugarValue);
+        nutrientToTextMap.put(Nutrient.AddedSugar, addedSugarValue);
+        nutrientToTextMap.put(Nutrient.Protein, proteinValue);
+
+        backBtn.setOnClickListener(this);
+        resetBtn.setOnClickListener(this);
+        doneBtn.setOnClickListener(this);
+
+        servingSizeLyt.setVisibility(View.GONE);
+        potassiumLyt.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == backBtn.getId()) {
+            finish();
+        } else if (id == resetBtn.getId()) {
+            parser.resetParse();
+        } else if (id == doneBtn.getId()) {
+            // finished parsing
+        }
     }
 
     private void bindInputAnalyzer() {
@@ -159,4 +258,20 @@ public class ScannerActivity extends AppCompatActivity {
     public static void startScanner(Context context, @Nullable UnitCallback callback) {
         context.startActivity(new Intent(context, ScannerActivity.class));
     }
+
+    public void updateNutritionalUI() {
+        HashMap<Nutrient, Pair<Double, NutrientMeasurement>> information = parser.getParsedNutrients();
+
+        for (Nutrient nutrient: nutrientToTextMap.keySet()) {
+            try {
+                String measurement = information.get(nutrient).second != NutrientMeasurement.none ? information.get(nutrient).second.name() : "";
+                DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+                DecimalFormat df = new DecimalFormat("#####.#", otherSymbols);
+                nutrientToTextMap.get(nutrient).setText(df.format(information.get(nutrient).first) + "" + measurement);
+            } catch (NullPointerException e) {
+                nutrientToTextMap.get(nutrient).setText(R.string.filler_value);
+            }
+        }
+    }
+
 }
