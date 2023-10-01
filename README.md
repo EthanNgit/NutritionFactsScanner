@@ -12,9 +12,9 @@ The algorithm is fairly simple so I will give a quick summary here.
 - Otherwise give up and move to the next line
 This is really oversimplified, where I did not talk about the extensive use of set searching, but I think based on that description you can get the general idea.</br>
 ## Known issues
-[ ] Major drawback is the bottlecap of search time due to the OCR accuracy
-[ ] Calories is hard to capture (when the ocr does not pick it up as a single line)
-[ ] No Serving size support (would have to devise a new method to parsing atleast the grams)
+- [ ] Major drawback is the bottlecap of search time due to the OCR accuracy
+- [ ] Calories is hard to capture (when the ocr does not pick it up as a single line)
+- [ ] No Serving size support (would have to devise a new method to parsing atleast the grams)
 </br>
 ## Other
 > Last updated 10/1/2023
