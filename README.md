@@ -16,4 +16,5 @@ This is really oversimplified, where I did not talk about the extensive use of s
 [ ] Calories is hard to capture (when the ocr does not pick it up as a single line)
 [ ] No Serving size support (would have to devise a new method to parsing atleast the grams)
 </br>
+## Other
 > Last updated 10/1/2023
