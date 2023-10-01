@@ -17,5 +17,5 @@ Here I describe it (although the writing is hard to read), it describes the foll
 ## Latest Update
 The algorithm was put through some improv, but the general idea works well. I got it to scan calories as of now, but the rest should be kinda rinse and repeat. (will upload the project files soon)
 Here is a quick picture of what it looks like now
-![image](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/d5ea3691-3e18-426f-ae41-f356355747c0)
 
+![phone](https://github.com/EthanNgit/NutritionFactsScanner/assets/105979510/9f86e036-134c-44d3-a967-2170ed52ae29)
