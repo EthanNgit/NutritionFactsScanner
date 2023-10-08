@@ -17,7 +17,6 @@ The algorithm is fairly simple so I will give a quick summary here.
 - [ ] Major drawback is the bottlecap of search time due to the OCR accuracy
 - [ ] Calories is hard to capture (when the ocr does not pick it up as a single line)
 - [ ] No Serving size support (would have to devise a new method to parsing atleast the grams)
-</br>
 
 ## Other
 > Last updated 10/1/2023
